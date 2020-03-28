@@ -6,7 +6,7 @@ RobotArm - приложение для управления роботизиро
 
 В разработке используется самые передовые стредства и сервисы: Flutter SDK, Figma, Android Studio, Lunacy, WebStorm, Trello, GitHub.
 
-Ссылка на сайт или презентацию проекта, если имеются в открытом доступе.
+[Ссылка на сайт](http://pd-2020-1.std-936.ist.mospolytech.ru/)
 
 Задачи по проекту доступны на доске [trello](https://trello.com/b/14zSscM2/%D0%BF%D0%B4-2-%D1%81%D0%B5%D0%BC%D0%B5%D1%81%D1%82%D1%80)
 
