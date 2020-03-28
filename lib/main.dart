@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'gestures.dart';
 
 class BottomTabBar extends StatefulWidget {
   const BottomTabBar({Key key}) : super(key: key);
@@ -69,20 +70,99 @@ class GesturesMain extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-      appBar: new AppBar(
-        automaticallyImplyLeading: false,
-        title: new Text('Жесты'),
-        leading: IconButton(
-          icon: Icon(
-            Icons.settings,
-            color: TextColor,
+        appBar: new AppBar(
+          automaticallyImplyLeading: false,
+          title: new Text('Жесты'),
+          leading: IconButton(
+            icon: Icon(
+              Icons.settings,
+              color: TextColor,
+            ),
+            onPressed: null,
           ),
-          onPressed: null,
         ),
-        backgroundColor: PrimaryColor,
-      ),
-      backgroundColor: PrimaryColor,
-    );
+        body: new GridView.count(
+          primary: false,
+          padding: const EdgeInsets.all(20),
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
+          childAspectRatio: (1.0 / 1.75),
+          crossAxisCount: 2,
+          children: <Widget>[
+            new Card(
+              color: SecondaryColor,
+              elevation: 0.0,
+              child: new InkWell(
+                splashColor: AccentColor,
+                onTap: () {},
+                child: Row(
+                  children: <Widget>[
+                    new Expanded(
+                        child: Center(
+                            child: new Text(
+                      'Общие',
+                      style: TextStyle(color: PrimaryColor, fontSize: 25),
+                    ))),
+                  ],
+                ),
+              ),
+            ),
+            new Card(
+              color: SecondaryColor,
+              elevation: 0.0,
+              child: new InkWell(
+                splashColor: AccentColor,
+                onTap: () {},
+                child: Row(
+                  children: <Widget>[
+                    new Expanded(
+                        child: Center(
+                            child: new Text(
+                      'Одноручные',
+                      style: TextStyle(color: PrimaryColor, fontSize: 25),
+                    ))),
+                  ],
+                ),
+              ),
+            ),
+            new Card(
+              color: SecondaryColor,
+              elevation: 0.0,
+              child: new InkWell(
+                splashColor: AccentColor,
+                onTap: () {},
+                child: Row(
+                  children: <Widget>[
+                    new Expanded(
+                        child: Center(
+                            child: new Text(
+                      'Двуручные',
+                      style: TextStyle(color: PrimaryColor, fontSize: 25),
+                    ))),
+                  ],
+                ),
+              ),
+            ),
+            new Card(
+              color: SecondaryColor,
+              elevation: 0.0,
+              child: new InkWell(
+                splashColor: AccentColor,
+                onTap: () {},
+                child: Row(
+                  children: <Widget>[
+                    new Expanded(
+                        child: Center(
+                            child: new Text(
+                      'Избранное',
+                      style: TextStyle(color: PrimaryColor, fontSize: 25),
+                    ))),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }
 
@@ -111,9 +191,9 @@ void main() => runApp(new MaterialApp(
       debugShowCheckedModeBanner: false,
       home: new BottomTabBar(),
       theme: new ThemeData(
-        primaryColor: PrimaryColor,
         accentColor: TextColor,
         backgroundColor: PrimaryColor,
+        appBarTheme: new AppBarTheme(color: PrimaryColor),
         scaffoldBackgroundColor: PrimaryColor,
         applyElevationOverlayColor: false,
         tabBarTheme: new TabBarTheme(
