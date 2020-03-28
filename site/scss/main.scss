@@ -1,0 +1,45 @@
+body, html{
+  margin: 0;
+  padding: 0;
+}
+
+div, header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-content{
+  width: 1140px;
+}
+
+.btn-green{
+  width: 130px;
+  height: 35px;
+  background: #14B45C;
+  border-radius: 10px;
+}
+
+header{
+  background: #20232D;
+  height: 100vh;
+  align-items: flex-start;
+  color: #ffffff;
+
+  .main-content{
+    .block-row{
+      width: 95%;
+      justify-content: space-between;
+
+      .ul{
+        justify-content: flex-end;
+
+        .li{
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}
+
+
