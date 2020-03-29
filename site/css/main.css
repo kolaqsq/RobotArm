@@ -58,7 +58,7 @@ header {
     header .main-content .block-row {
       width: 95%;
       justify-content: space-between;
-      margin: 25px 0 175px 0; }
+      margin: 25px 0 150px 0; }
       header .main-content .block-row .logo:hover .hidden-text {
         font-size: 36px; }
       header .main-content .block-row .ul {
@@ -74,9 +74,9 @@ header {
       justify-content: space-around; }
       header .main-content .content .block-img img {
         width: 200px;
-        border: 4px solid white;
+        border: 5px solid rgba(0, 0, 0, 0.8);
         border-radius: 20px;
-        box-shadow: 0 0 400px rgba(0, 0, 0, 0.3); }
+        box-shadow: 0 0 800px rgba(255, 255, 255, 0.1), 12px 10px 0 rgba(0, 0, 0, 0.25), 24px 20px 0 rgba(0, 0, 0, 0.25); }
       header .main-content .content .block-col {
         max-width: 500px;
         margin-left: 30px;
@@ -160,36 +160,41 @@ header {
   align-items: flex-start; }
   .page3 .main-content .block-col {
     width: 95%; }
-    .page3 .main-content .block-col .list {
+    .page3 .main-content .block-col > .list {
       margin-top: 100px;
       width: 95%;
       justify-content: space-around;
       align-items: flex-end;
       transition: 0.4s; }
-      .page3 .main-content .block-col .list .li {
+      .page3 .main-content .block-col > .list .li {
         flex-direction: column;
         margin-bottom: -10px; }
-        .page3 .main-content .block-col .list .li h3 {
+        .page3 .main-content .block-col > .list .li h3 {
           text-align: center;
           white-space: nowrap; }
-        .page3 .main-content .block-col .list .li .circle {
+        .page3 .main-content .block-col > .list .li .circle {
           width: 15px;
           height: 15px;
           background: #20232D;
           border-radius: 50%; }
-        .page3 .main-content .block-col .list .li .circle-big {
-          width: 25px;
-          height: 25px; }
-      .page3 .main-content .block-col .list .down {
+        .page3 .main-content .block-col > .list .li .circle-big {
+          z-index: 3;
+          width: 18px;
+          height: 18px;
+          border: 4px solid #14B45C;
+          background: white; }
+      .page3 .main-content .block-col > .list .down {
         align-self: flex-start;
         position: relative;
         top: 76px; }
-      .page3 .main-content .block-col .list .li-big {
+      .page3 .main-content .block-col > .list .li-big {
         position: relative;
         top: 5px; }
-      .page3 .main-content .block-col .list .li-empty {
+        .page3 .main-content .block-col > .list .li-big h3 {
+          color: #14B45C; }
+      .page3 .main-content .block-col > .list .li-empty {
         z-index: 2; }
-        .page3 .main-content .block-col .list .li-empty .circle {
+        .page3 .main-content .block-col > .list .li-empty .circle {
           background: #ffffff;
           width: 9px;
           height: 9px;
@@ -201,6 +206,21 @@ header {
       background: #20232D;
       border-radius: 5px;
       transition: 0.5s; }
+    .page3 .main-content .block-col .block-hidden {
+      transform: scale(0);
+      transition: 0.4s; }
+      .page3 .main-content .block-col .block-hidden .list {
+        margin-top: -135px;
+        flex-direction: column; }
+        .page3 .main-content .block-col .block-hidden .list .li {
+          margin-bottom: 35px; }
+          .page3 .main-content .block-col .block-hidden .list .li h3 {
+            text-align: center; }
+        .page3 .main-content .block-col .block-hidden .list .li-big h3 {
+          font-size: 28px;
+          color: #14B45C; }
+        .page3 .main-content .block-col .block-hidden .list .li-done h3 {
+          text-decoration: line-through; }
 
 footer {
   background: #20232D;
@@ -233,12 +253,16 @@ footer {
   header .main-content .block-row .ul {
     transform: scale(0); }
   header .main-content .content .block-img {
-    display: none; } }
+    display: none; }
+  header .main-content .content .block-col {
+    align-items: center; } }
 @media (max-width: 800px) {
-  .page3 .main-content .block-col .list {
+  .page3 .main-content .block-col > .list {
     transform: scale(0); }
   .page3 .main-content .block-col .line {
-    transform: scale(0); } }
+    transform: scale(0); }
+  .page3 .main-content .block-col .block-hidden {
+    transform: scale(1); } }
 @media (max-width: 980px) {
   .main-content {
     width: 100%; } }
