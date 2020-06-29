@@ -15,7 +15,7 @@ class _BottomTabBarState extends State<BottomTabBar>
 
   static final _kTabPages = <Widget>[
     new GesturesMain(),
-    new LettersMain(),
+    new DactylsMain(),
   ];
   static const _kTabs = <Tab>[
     Tab(
