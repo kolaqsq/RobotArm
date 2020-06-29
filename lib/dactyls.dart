@@ -10,7 +10,7 @@ class LettersMain extends StatelessWidget {
     // TODO: implement build
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Буквы'),
+        title: new Text('Дактилемы'),
         backgroundColor: PrimaryColor,
       ),
       backgroundColor: PrimaryColor,
