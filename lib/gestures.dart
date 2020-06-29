@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'main.dart';
 
 class GesturesMain extends StatelessWidget {
@@ -15,7 +14,7 @@ class GesturesMain extends StatelessWidget {
           leading: IconButton(
               icon: Icon(
                 Icons.settings,
-//                color: TextColor,
+                color: TextColor,
               ),
               onPressed: null),
         ),
@@ -50,10 +49,10 @@ class GesturesMainCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Card(
-//      color: SecondaryColor,
+      color: SecondaryColor,
       elevation: 0.0,
       child: new InkWell(
-//        splashColor: AccentColor,
+        splashColor: AccentColor,
         onTap: () {
           Navigator.push(
               context,
@@ -66,9 +65,9 @@ class GesturesMainCard extends StatelessWidget {
             new Expanded(
                 child: Center(
                     child: new Text(
-              _cardName,
-              style: TextStyle(fontSize: 25),
-            ))),
+                      _cardName,
+                      style: TextStyle(color: PrimaryColor, fontSize: 25),
+                    ))),
           ],
         ),
       ),
@@ -92,7 +91,7 @@ class GesturesCategory extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-//            color: TextColor,
+            color: TextColor,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -123,10 +122,10 @@ class GesturesCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Card(
-//      color: SecondaryColor,
+      color: SecondaryColor,
       elevation: 0.0,
       child: new InkWell(
-//        splashColor: AccentColor,
+        splashColor: AccentColor,
         onTap: () {
           Scaffold.of(context).showSnackBar(new SnackBar(
             content: Text('Показывается жест $_index'),
@@ -137,9 +136,9 @@ class GesturesCategoryCard extends StatelessWidget {
             new Expanded(
                 child: Center(
                     child: new Text(
-              '$_cardName $_index',
-              style: TextStyle(fontSize: 20),
-            ))),
+                      '$_cardName $_index',
+                      style: TextStyle(color: PrimaryColor, fontSize: 20),
+                    ))),
           ],
         ),
       ),

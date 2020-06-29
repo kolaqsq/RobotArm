@@ -11,7 +11,9 @@ class LettersMain extends StatelessWidget {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Буквы'),
+        backgroundColor: PrimaryColor,
       ),
+      backgroundColor: PrimaryColor,
     );
   }
 }
