@@ -50,7 +50,10 @@ class DactylsMainState extends State<DactylsMain> {
                           SnackBar(content: Text('Демонстрируется дактилема')));
                     }
                   },
-                  child: Text('Демонстрация'),
+                  child: Text(
+                    'Демонстрация',
+                    style: TextStyle(color: PrimaryColor, fontSize: 20),
+                  ),
                 )
               ],
             ),
