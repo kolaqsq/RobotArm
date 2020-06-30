@@ -19,11 +19,8 @@ class GesturesMain extends StatelessWidget {
                 color: TextColor,
               ),
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Connection()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Connection()));
               }),
         ),
         body: new GridView.count(
