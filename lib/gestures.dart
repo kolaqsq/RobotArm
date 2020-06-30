@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'main.dart';
+import 'connection.dart';
 
 class GesturesMain extends StatelessWidget {
   GesturesMain();
@@ -17,7 +18,13 @@ class GesturesMain extends StatelessWidget {
                 Icons.settings,
                 color: TextColor,
               ),
-              onPressed: null),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Connection()));
+              }),
         ),
         body: new GridView.count(
           primary: false,
