@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'main.dart';
 
 class GesturesMain extends StatelessWidget {
@@ -23,7 +24,6 @@ class GesturesMain extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
-          childAspectRatio: (1.0 / 1.75),
           crossAxisCount: 2,
           children: <Widget>[
             new GesturesMainCard('Общие', 'Обжие жесты', 'Общий\nжест'),
@@ -33,7 +33,7 @@ class GesturesMain extends StatelessWidget {
                 'Двуручные', 'Двуручные жесты', 'Двуручный\nжест'),
             new GesturesMainCard(
                 'Избранные', 'Избранные жесты', 'Избранный\nжест'),
-            new GesturesMainCardAll(),
+            new GesturesMainCardSearch(),
           ],
         ));
   }
@@ -76,8 +76,8 @@ class GesturesMainCard extends StatelessWidget {
   }
 }
 
-class GesturesMainCardAll extends StatelessWidget {
-  GesturesMainCardAll();
+class GesturesMainCardSearch extends StatelessWidget {
+  GesturesMainCardSearch();
 
   @override
   Widget build(BuildContext context) {
@@ -88,8 +88,10 @@ class GesturesMainCardAll extends StatelessWidget {
       child: new InkWell(
         splashColor: AccentColor,
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => GesturesCategoryAll()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => GesturesCategorySearch()));
         },
         child: Row(
           children: <Widget>[
@@ -143,8 +145,36 @@ class GesturesCategory extends StatelessWidget {
   }
 }
 
-class GesturesCategoryAll extends StatelessWidget {
-  GesturesCategoryAll();
+class GesturesCategorySearch extends StatefulWidget {
+  @override
+  GesturesCategorySearchState createState() {
+    return GesturesCategorySearchState();
+  }
+}
+
+class GesturesCategorySearchState extends State<GesturesCategorySearch> {
+  static List<String> allCardNames = List.generate(400, (index) {
+    if (index < 100) {
+      return 'Общий\nжест $index';
+    } else if (index < 200) {
+      return 'Одноручный\nжест ${index - 100}';
+    } else if (index < 300) {
+      return 'Двуручный\nжест ${index - 200}';
+    } else if (index < 400) {
+      return 'Избранный\nжест ${index - 300}';
+    } else
+      return null;
+  });
+  List<String> currentCardNames = allCardNames;
+  bool isSearching = false;
+
+  void _updateCards(value) {
+    setState(() {
+      currentCardNames = allCardNames
+          .where((names) => names.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +182,20 @@ class GesturesCategoryAll extends StatelessWidget {
     return new Scaffold(
       appBar: new AppBar(
         automaticallyImplyLeading: false,
-        title: new Text('Все'),
+        title: !isSearching
+            ? new Text('Все')
+            : new TextField(
+                style: TextStyle(color: TextColor, fontSize: 20),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Поиск жестов',
+                  hintStyle: TextStyle(color: AccentColor, fontSize: 20),
+                ),
+//                controller: controller,
+                onChanged: (value) {
+                  _updateCards(value);
+                },
+              ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -162,25 +205,45 @@ class GesturesCategoryAll extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
+        actions: <Widget>[
+          isSearching
+              ? IconButton(
+                  icon: Icon(
+                    Icons.clear,
+                    color: TextColor,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      this.isSearching = !this.isSearching;
+                      currentCardNames = allCardNames;
+                    });
+                  },
+                )
+              : IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    color: TextColor,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      this.isSearching = !this.isSearching;
+                    });
+                  },
+                )
+        ],
       ),
-      body: new GridView.count(
+      body: new GridView.builder(
+        itemCount: currentCardNames.length,
+        itemBuilder: (BuildContext context, int index) {
+          return new GesturesCategoryCardNonIndex(currentCardNames[index]);
+        },
         primary: false,
         padding: const EdgeInsets.all(20),
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
-        crossAxisCount: 2,
-        children: List.generate(400, (index) {
-          if (index < 100) {
-            return new GesturesCategoryCard('Общий\nжест', index);
-          } else if (index < 200) {
-            return new GesturesCategoryCard('Одноручный\nжест', index - 100);
-          } else if (index < 300) {
-            return new GesturesCategoryCard('Двуручный\nжест', index - 200);
-          } else if (index < 400) {
-            return new GesturesCategoryCard('Избранный\nжест', index - 300);
-          }
-          return null;
-        }),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
+        ),
       ),
     );
   }
@@ -202,7 +265,7 @@ class GesturesCategoryCard extends StatelessWidget {
         splashColor: AccentColor,
         onTap: () {
           Scaffold.of(context).showSnackBar(new SnackBar(
-            content: Text('Показывается жест $_index'),
+            content: Text('Демонстрирутся $_cardName $_index'),
           ));
         },
         child: Row(
@@ -211,6 +274,39 @@ class GesturesCategoryCard extends StatelessWidget {
                 child: Center(
                     child: new Text(
               '$_cardName $_index',
+              style: TextStyle(color: PrimaryColor, fontSize: 20),
+            ))),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class GesturesCategoryCardNonIndex extends StatelessWidget {
+  final String _cardName;
+
+  GesturesCategoryCardNonIndex(this._cardName);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Card(
+      color: SecondaryColor,
+      elevation: 0.0,
+      child: new InkWell(
+        splashColor: AccentColor,
+        onTap: () {
+          Scaffold.of(context).showSnackBar(new SnackBar(
+            content: Text('Демонстрируется $_cardName'),
+          ));
+        },
+        child: Row(
+          children: <Widget>[
+            new Expanded(
+                child: Center(
+                    child: new Text(
+              '$_cardName',
               style: TextStyle(color: PrimaryColor, fontSize: 20),
             ))),
           ],
