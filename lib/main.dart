@@ -64,6 +64,8 @@ class _BottomTabBarState extends State<BottomTabBar>
   }
 }
 
+
+
 const PrimaryColor = Color(0xFF2F303B);
 const SecondaryColor = Color(0xFFC4C4C4);
 const TextColor = Color(0xFFFFFFFF);
