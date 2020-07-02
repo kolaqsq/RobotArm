@@ -18,6 +18,7 @@ class DactylsMainState extends State<DactylsMain> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Дактилемы'),
+        leading: new Container(),
         backgroundColor: PrimaryColor,
       ),
       body: new Form(
@@ -42,6 +43,7 @@ class DactylsMainState extends State<DactylsMain> {
                   },
                 ),
                 RaisedButton(
+                  color: AccentColor,
                   onPressed: () {
                     // Validate returns true if the form is valid, otherwise false
                     if (_formKey.currentState.validate()) {

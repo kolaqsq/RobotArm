@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'auth.dart';
 import 'dactyls.dart';
 import 'gestures.dart';
-import 'auth.dart';
 
 class BottomTabBar extends StatefulWidget {
   const BottomTabBar({Key key}) : super(key: key);
@@ -70,7 +70,7 @@ class _BottomTabBarState extends State<BottomTabBar>
   }
 }
 
-const PrimaryColor = Color(0xFF2F303B);
+const PrimaryColor = Color(0xFF004D40);
 const SecondaryColor = Color(0xFFC4C4C4);
 const TextColor = Color(0xFFFFFFFF);
 const AccentColor = Color(0xFF7E7E7E);

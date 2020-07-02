@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'main.dart';
 import 'connection.dart';
+import 'main.dart';
 
 class GesturesMain extends StatelessWidget {
   GesturesMain();
