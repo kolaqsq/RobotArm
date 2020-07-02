@@ -84,7 +84,7 @@ class AuthScreenState extends State<AuthScreen> {
                     child: new Container(
                       height: 25.0,
                       width: 25.0,
-                      decoration: currentDigit >= 2
+                      decoration: currentDigit >= 1
                           ? new BoxDecoration(
                               shape: BoxShape.circle,
                               color: TextColor,
