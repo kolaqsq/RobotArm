@@ -1,4 +1,6 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+
 import 'main.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -9,6 +11,52 @@ class AuthScreen extends StatefulWidget {
 }
 
 class AuthScreenState extends State<AuthScreen> {
+  static List<int> password = [1, 2, 3, 4, 5, 6];
+  List<int> userInput = [];
+  int currentDigit = 0;
+  String correct = '';
+
+  void _input(value) {
+    setState(() {
+      currentDigit++;
+      userInput.add(value);
+      if (currentDigit == 6) {
+        setState(() {
+          _checkPassword(userInput);
+        });
+      }
+    });
+  }
+
+  void _delete() {
+    setState(() {
+      currentDigit--;
+      userInput.removeLast();
+    });
+  }
+
+  Function eq = const ListEquality().equals;
+
+  void _checkPassword(array) {
+    setState(() {
+      if (eq(userInput, password)) {
+        correct = 'Верный пароль';
+        Future.delayed(const Duration(milliseconds: 500), () {
+          userInput = [];
+          currentDigit = 0;
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => BottomTabBar()));
+        });
+      } else {
+        setState(() {
+          correct = 'Неправильный пароль';
+          userInput = [];
+          currentDigit = 0;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -16,7 +64,7 @@ class AuthScreenState extends State<AuthScreen> {
       appBar: null,
       body: new Padding(
         padding:
-            EdgeInsets.only(top: 50.0, right: 20.0, bottom: 20.0, left: 20.0),
+            EdgeInsets.only(top: 100.0, right: 20.0, bottom: 20.0, left: 20.0),
         child: new Column(
           children: <Widget>[
             Padding(
@@ -36,10 +84,15 @@ class AuthScreenState extends State<AuthScreen> {
                     child: new Container(
                       height: 25.0,
                       width: 25.0,
-                      decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: PrimaryColor,
-                          border: Border.all(width: 2.0, color: TextColor)),
+                      decoration: currentDigit >= 2
+                          ? new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: TextColor,
+                              border: Border.all(width: 2.0, color: TextColor))
+                          : new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: PrimaryColor,
+                              border: Border.all(width: 2.0, color: TextColor)),
                     ),
                   ),
                   new Padding(
@@ -47,10 +100,15 @@ class AuthScreenState extends State<AuthScreen> {
                     child: new Container(
                       height: 25.0,
                       width: 25.0,
-                      decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: PrimaryColor,
-                          border: Border.all(width: 2.0, color: TextColor)),
+                      decoration: currentDigit >= 2
+                          ? new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: TextColor,
+                              border: Border.all(width: 2.0, color: TextColor))
+                          : new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: PrimaryColor,
+                              border: Border.all(width: 2.0, color: TextColor)),
                     ),
                   ),
                   new Padding(
@@ -58,10 +116,15 @@ class AuthScreenState extends State<AuthScreen> {
                     child: new Container(
                       height: 25.0,
                       width: 25.0,
-                      decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: PrimaryColor,
-                          border: Border.all(width: 2.0, color: TextColor)),
+                      decoration: currentDigit >= 3
+                          ? new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: TextColor,
+                              border: Border.all(width: 2.0, color: TextColor))
+                          : new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: PrimaryColor,
+                              border: Border.all(width: 2.0, color: TextColor)),
                     ),
                   ),
                   new Padding(
@@ -69,10 +132,15 @@ class AuthScreenState extends State<AuthScreen> {
                     child: new Container(
                       height: 25.0,
                       width: 25.0,
-                      decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: PrimaryColor,
-                          border: Border.all(width: 2.0, color: TextColor)),
+                      decoration: currentDigit >= 4
+                          ? new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: TextColor,
+                              border: Border.all(width: 2.0, color: TextColor))
+                          : new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: PrimaryColor,
+                              border: Border.all(width: 2.0, color: TextColor)),
                     ),
                   ),
                   new Padding(
@@ -80,10 +148,15 @@ class AuthScreenState extends State<AuthScreen> {
                     child: new Container(
                       height: 25.0,
                       width: 25.0,
-                      decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: PrimaryColor,
-                          border: Border.all(width: 2.0, color: TextColor)),
+                      decoration: currentDigit >= 5
+                          ? new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: TextColor,
+                              border: Border.all(width: 2.0, color: TextColor))
+                          : new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: PrimaryColor,
+                              border: Border.all(width: 2.0, color: TextColor)),
                     ),
                   ),
                   new Padding(
@@ -91,13 +164,25 @@ class AuthScreenState extends State<AuthScreen> {
                     child: new Container(
                       height: 25.0,
                       width: 25.0,
-                      decoration: new BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: PrimaryColor,
-                          border: Border.all(width: 2.0, color: TextColor)),
+                      decoration: currentDigit >= 6
+                          ? new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: TextColor,
+                              border: Border.all(width: 2.0, color: TextColor))
+                          : new BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: PrimaryColor,
+                              border: Border.all(width: 2.0, color: TextColor)),
                     ),
                   ),
                 ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 35.0),
+              child: new Text(
+                correct,
+                style: new TextStyle(color: TextColor, fontSize: 20),
               ),
             ),
             Padding(
@@ -116,7 +201,7 @@ class AuthScreenState extends State<AuthScreen> {
                       child: new FlatButton(
                         splashColor: AccentColor,
                         onPressed: () {
-                          print('gunga');
+                          _input(1);
                         },
                         child: new Text(
                           '1',
@@ -137,7 +222,7 @@ class AuthScreenState extends State<AuthScreen> {
                       child: new FlatButton(
                         splashColor: AccentColor,
                         onPressed: () {
-                          print('gunga');
+                          _input(2);
                         },
                         child: new Text(
                           '2',
@@ -158,7 +243,7 @@ class AuthScreenState extends State<AuthScreen> {
                       child: new FlatButton(
                         splashColor: AccentColor,
                         onPressed: () {
-                          print('gunga');
+                          _input(3);
                         },
                         child: new Text(
                           '3',
@@ -187,7 +272,7 @@ class AuthScreenState extends State<AuthScreen> {
                       child: new FlatButton(
                         splashColor: AccentColor,
                         onPressed: () {
-                          print('gunga');
+                          _input(4);
                         },
                         child: new Text(
                           '4',
@@ -208,7 +293,7 @@ class AuthScreenState extends State<AuthScreen> {
                       child: new FlatButton(
                         splashColor: AccentColor,
                         onPressed: () {
-                          print('gunga');
+                          _input(5);
                         },
                         child: new Text(
                           '5',
@@ -229,7 +314,7 @@ class AuthScreenState extends State<AuthScreen> {
                       child: new FlatButton(
                         splashColor: AccentColor,
                         onPressed: () {
-                          print('gunga');
+                          _input(6);
                         },
                         child: new Text(
                           '6',
@@ -258,7 +343,7 @@ class AuthScreenState extends State<AuthScreen> {
                       child: new FlatButton(
                         splashColor: AccentColor,
                         onPressed: () {
-                          print('gunga');
+                          _input(7);
                         },
                         child: new Text(
                           '7',
@@ -279,7 +364,7 @@ class AuthScreenState extends State<AuthScreen> {
                       child: new FlatButton(
                         splashColor: AccentColor,
                         onPressed: () {
-                          print('gunga');
+                          _input(8);
                         },
                         child: new Text(
                           '8',
@@ -300,7 +385,7 @@ class AuthScreenState extends State<AuthScreen> {
                       child: new FlatButton(
                         splashColor: AccentColor,
                         onPressed: () {
-                          print('gunga');
+                          _input(9);
                         },
                         child: new Text(
                           '9',
@@ -337,7 +422,7 @@ class AuthScreenState extends State<AuthScreen> {
                       child: new FlatButton(
                         splashColor: AccentColor,
                         onPressed: () {
-                          print('gunga');
+                          _input(0);
                         },
                         child: new Text(
                           '0',
@@ -359,7 +444,7 @@ class AuthScreenState extends State<AuthScreen> {
                       child: new IconButton(
                         splashColor: AccentColor,
                         onPressed: () {
-                          print('gunga');
+                          _delete();
                         },
                         icon: Icon(
                           Icons.chevron_left,
@@ -378,20 +463,3 @@ class AuthScreenState extends State<AuthScreen> {
     );
   }
 }
-
-void main() => runApp(new MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: new AuthScreen(),
-      theme: new ThemeData(
-        accentColor: TextColor,
-        backgroundColor: PrimaryColor,
-        appBarTheme: new AppBarTheme(color: PrimaryColor),
-        scaffoldBackgroundColor: PrimaryColor,
-        applyElevationOverlayColor: false,
-        tabBarTheme: new TabBarTheme(
-          labelColor: TextColor,
-          unselectedLabelColor: AccentColor,
-          indicatorSize: TabBarIndicatorSize.label,
-        ),
-      ),
-    ));

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'gestures.dart';
+import 'package:flutter/services.dart';
+
 import 'dactyls.dart';
+import 'gestures.dart';
+import 'auth.dart';
 
 class BottomTabBar extends StatefulWidget {
   const BottomTabBar({Key key}) : super(key: key);
@@ -47,17 +50,20 @@ class _BottomTabBarState extends State<BottomTabBar>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: null,
-      body: TabBarView(
-        children: _kTabPages,
-        controller: _tabController,
-      ),
-      bottomNavigationBar: Material(
-        color: PrimaryColor,
-        child: TabBar(
-          tabs: _kTabs,
+    return new WillPopScope(
+      onWillPop: () => SystemNavigator.pop(),
+      child: Scaffold(
+        appBar: null,
+        body: TabBarView(
+          children: _kTabPages,
           controller: _tabController,
+        ),
+        bottomNavigationBar: Material(
+          color: PrimaryColor,
+          child: TabBar(
+            tabs: _kTabs,
+            controller: _tabController,
+          ),
         ),
       ),
     );
@@ -71,7 +77,7 @@ const AccentColor = Color(0xFF7E7E7E);
 
 void main() => runApp(new MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: new BottomTabBar(),
+      home: new AuthScreen(),
       theme: new ThemeData(
         accentColor: TextColor,
         backgroundColor: PrimaryColor,
