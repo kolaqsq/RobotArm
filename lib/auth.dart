@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import 'main.dart';
+import 'tab.dart';
 
 class AuthScreen extends StatefulWidget {
   @override
@@ -438,15 +439,3 @@ class DotActive extends StatelessWidget {
     );
   }
 }
-
-//class Check extends StatelessWidget {
-//  final int checkStatus;
-//
-//  Check(this.checkStatus);
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    // TODO: implement build
-//    return new AnimatedOpacity(opacity: null, duration: null);
-//  }
-//}

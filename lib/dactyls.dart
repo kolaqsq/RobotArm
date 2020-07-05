@@ -43,7 +43,7 @@ class DactylsMainState extends State<DactylsMain> {
                   },
                 ),
                 RaisedButton(
-                  color: AccentColor,
+                  color: TextColor,
                   onPressed: () {
                     // Validate returns true if the form is valid, otherwise false
                     if (_formKey.currentState.validate()) {
