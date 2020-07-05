@@ -10,7 +10,7 @@ class DactylsMain extends StatefulWidget {
 }
 
 class DactylsMainState extends State<DactylsMain> {
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class DactylsMainState extends State<DactylsMain> {
         backgroundColor: PrimaryColor,
       ),
       body: new Form(
-          key: _formKey,
+          key: formKey,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
@@ -43,10 +43,10 @@ class DactylsMainState extends State<DactylsMain> {
                   },
                 ),
                 RaisedButton(
-                  color: TextColor,
+                  color: SecondaryColor,
                   onPressed: () {
                     // Validate returns true if the form is valid, otherwise false
-                    if (_formKey.currentState.validate()) {
+                    if (formKey.currentState.validate()) {
                       // If the form is valid, display a SnackBar
                       Scaffold.of(context).showSnackBar(
                           SnackBar(content: Text('Демонстрируется дактилема')));

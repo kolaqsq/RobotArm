@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'auth.dart';
 import 'main.dart';
 
 class Connection extends StatefulWidget {
@@ -33,10 +34,10 @@ class ConnectionState extends State<Connection> {
 }
 
 class ConnectionItem extends StatelessWidget {
-  final String _name;
-  final bool _correct;
+  final String name;
+  final bool correct;
 
-  ConnectionItem(this._name, this._correct);
+  ConnectionItem(this.name, this.correct);
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +49,12 @@ class ConnectionItem extends StatelessWidget {
         splashColor: AccentColor,
         onTap: () {
           Scaffold.of(context).showSnackBar(new SnackBar(
-            content: Text('Идет подключение к $_name'),
+            content: Text('Идет подключение к $name'),
           ));
           Future.delayed(const Duration(microseconds: 500), () {
-            if (_correct)
-              Scaffold.of(context).showSnackBar(
-                  new SnackBar(content: Text('Подключенно к $_name')));
+            if (correct)
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AuthScreen()));
             else
               Scaffold.of(context).showSnackBar(new SnackBar(
                   content: Text('Ошибка. Устройство не поддерживается')));
@@ -65,7 +66,7 @@ class ConnectionItem extends StatelessWidget {
                 child: Padding(
               padding: const EdgeInsets.only(left: 20.0, top: 5.0, bottom: 5.0),
               child: new Text(
-                '$_name',
+                '$name',
                 style: TextStyle(color: TextColor, fontSize: 20),
               ),
             )),

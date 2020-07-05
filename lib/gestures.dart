@@ -44,11 +44,11 @@ class GesturesMain extends StatelessWidget {
 }
 
 class GesturesMainCard extends StatelessWidget {
-  final String _cardName;
-  final String _categoryName;
-  final String _categoryCardName;
+  final String cardName;
+  final String categoryName;
+  final String categoryCardName;
 
-  GesturesMainCard(this._cardName, this._categoryName, this._categoryCardName);
+  GesturesMainCard(this.cardName, this.categoryName, this.categoryCardName);
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +63,14 @@ class GesturesMainCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      GesturesCategory(_categoryName, _categoryCardName)));
+                      GesturesCategory(categoryName, categoryCardName)));
         },
         child: Row(
           children: <Widget>[
             new Expanded(
                 child: Center(
                     child: new Text(
-              _cardName,
+              cardName,
               style: TextStyle(color: PrimaryColor, fontSize: 25),
             ))),
           ],
@@ -113,10 +113,10 @@ class GesturesMainCardSearch extends StatelessWidget {
 }
 
 class GesturesCategory extends StatelessWidget {
-  final String _title;
-  final String _cardName;
+  final String title;
+  final String cardName;
 
-  GesturesCategory(this._title, this._cardName);
+  GesturesCategory(this.title, this.cardName);
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +124,7 @@ class GesturesCategory extends StatelessWidget {
     return new Scaffold(
       appBar: new AppBar(
         automaticallyImplyLeading: false,
-        title: new Text('$_title'),
+        title: new Text('$title'),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -142,7 +142,7 @@ class GesturesCategory extends StatelessWidget {
         mainAxisSpacing: 20,
         crossAxisCount: 2,
         children: List.generate(100, (index) {
-          return new GesturesCategoryCard(_cardName, index);
+          return new GesturesCategoryCard(cardName, index);
         }),
       ),
     );
@@ -172,7 +172,7 @@ class GesturesCategorySearchState extends State<GesturesCategorySearch> {
   List<String> currentCardNames = allCardNames;
   bool isSearching = false;
 
-  void _updateCards(value) {
+  void updateCards(value) {
     setState(() {
       currentCardNames = allCardNames
           .where((names) => names.toLowerCase().contains(value.toLowerCase()))
@@ -197,7 +197,7 @@ class GesturesCategorySearchState extends State<GesturesCategorySearch> {
                 ),
 //                controller: controller,
                 onChanged: (value) {
-                  _updateCards(value);
+                  updateCards(value);
                 },
               ),
         leading: IconButton(
@@ -254,10 +254,10 @@ class GesturesCategorySearchState extends State<GesturesCategorySearch> {
 }
 
 class GesturesCategoryCard extends StatelessWidget {
-  final String _cardName;
-  final int _index;
+  final String cardName;
+  final int index;
 
-  GesturesCategoryCard(this._cardName, this._index);
+  GesturesCategoryCard(this.cardName, this.index);
 
   @override
   Widget build(BuildContext context) {
@@ -269,7 +269,7 @@ class GesturesCategoryCard extends StatelessWidget {
         splashColor: AccentColor,
         onTap: () {
           Scaffold.of(context).showSnackBar(new SnackBar(
-            content: Text('Демонстрирутся $_cardName $_index'),
+            content: Text('Демонстрирутся $cardName $index'),
           ));
         },
         child: Row(
@@ -277,7 +277,7 @@ class GesturesCategoryCard extends StatelessWidget {
             new Expanded(
                 child: Center(
                     child: new Text(
-              '$_cardName $_index',
+              '$cardName $index',
               style: TextStyle(color: PrimaryColor, fontSize: 20),
             ))),
           ],
@@ -288,9 +288,9 @@ class GesturesCategoryCard extends StatelessWidget {
 }
 
 class GesturesCategoryCardNonIndex extends StatelessWidget {
-  final String _cardName;
+  final String cardName;
 
-  GesturesCategoryCardNonIndex(this._cardName);
+  GesturesCategoryCardNonIndex(this.cardName);
 
   @override
   Widget build(BuildContext context) {
@@ -302,7 +302,7 @@ class GesturesCategoryCardNonIndex extends StatelessWidget {
         splashColor: AccentColor,
         onTap: () {
           Scaffold.of(context).showSnackBar(new SnackBar(
-            content: Text('Демонстрируется $_cardName'),
+            content: Text('Демонстрируется $cardName'),
           ));
         },
         child: Row(
@@ -310,7 +310,7 @@ class GesturesCategoryCardNonIndex extends StatelessWidget {
             new Expanded(
                 child: Center(
                     child: new Text(
-              '$_cardName',
+              '$cardName',
               style: TextStyle(color: PrimaryColor, fontSize: 20),
             ))),
           ],
