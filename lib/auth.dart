@@ -14,7 +14,8 @@ class AuthScreenState extends State<AuthScreen> {
   static List<int> password = [1, 2, 3, 4, 5, 6];
   List<int> userInput = [];
   int currentDigit = 0;
-  String correct = '';
+  String checkStatus = '';
+  double opacity = 0.0;
 
   void _input(value) {
     setState(() {
@@ -29,10 +30,11 @@ class AuthScreenState extends State<AuthScreen> {
   }
 
   void _delete() {
-    setState(() {
-      currentDigit--;
-      userInput.removeLast();
-    });
+    if (currentDigit > 0)
+      setState(() {
+        currentDigit--;
+        userInput.removeLast();
+      });
   }
 
   Function eq = const ListEquality().equals;
@@ -40,7 +42,8 @@ class AuthScreenState extends State<AuthScreen> {
   void _checkPassword(array) {
     setState(() {
       if (eq(userInput, password)) {
-        correct = 'Верный пароль';
+        checkStatus = 'Верный пароль';
+        opacity = 1.0;
         Future.delayed(const Duration(milliseconds: 500), () {
           userInput = [];
           currentDigit = 0;
@@ -48,10 +51,14 @@ class AuthScreenState extends State<AuthScreen> {
               .push(MaterialPageRoute(builder: (context) => BottomTabBar()));
         });
       } else {
-        setState(() {
-          correct = 'Неправильный пароль';
-          userInput = [];
-          currentDigit = 0;
+        checkStatus = 'Неправильный пароль';
+        opacity = 1.0;
+        Future.delayed(const Duration(milliseconds: 500), () {
+          setState(() {
+            opacity = 0.0;
+            userInput = [];
+            currentDigit = 0;
+          });
         });
       }
     });
@@ -79,112 +86,25 @@ class AuthScreenState extends State<AuthScreen> {
               child: new Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  new Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.0),
-                    child: new Container(
-                      height: 25.0,
-                      width: 25.0,
-                      decoration: currentDigit >= 1
-                          ? new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: TextColor,
-                              border: Border.all(width: 2.0, color: TextColor))
-                          : new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: PrimaryColor,
-                              border: Border.all(width: 2.0, color: TextColor)),
-                    ),
-                  ),
-                  new Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.0),
-                    child: new Container(
-                      height: 25.0,
-                      width: 25.0,
-                      decoration: currentDigit >= 2
-                          ? new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: TextColor,
-                              border: Border.all(width: 2.0, color: TextColor))
-                          : new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: PrimaryColor,
-                              border: Border.all(width: 2.0, color: TextColor)),
-                    ),
-                  ),
-                  new Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.0),
-                    child: new Container(
-                      height: 25.0,
-                      width: 25.0,
-                      decoration: currentDigit >= 3
-                          ? new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: TextColor,
-                              border: Border.all(width: 2.0, color: TextColor))
-                          : new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: PrimaryColor,
-                              border: Border.all(width: 2.0, color: TextColor)),
-                    ),
-                  ),
-                  new Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.0),
-                    child: new Container(
-                      height: 25.0,
-                      width: 25.0,
-                      decoration: currentDigit >= 4
-                          ? new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: TextColor,
-                              border: Border.all(width: 2.0, color: TextColor))
-                          : new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: PrimaryColor,
-                              border: Border.all(width: 2.0, color: TextColor)),
-                    ),
-                  ),
-                  new Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.0),
-                    child: new Container(
-                      height: 25.0,
-                      width: 25.0,
-                      decoration: currentDigit >= 5
-                          ? new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: TextColor,
-                              border: Border.all(width: 2.0, color: TextColor))
-                          : new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: PrimaryColor,
-                              border: Border.all(width: 2.0, color: TextColor)),
-                    ),
-                  ),
-                  new Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.0),
-                    child: new Container(
-                      height: 25.0,
-                      width: 25.0,
-                      decoration: currentDigit >= 6
-                          ? new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: TextColor,
-                              border: Border.all(width: 2.0, color: TextColor))
-                          : new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: PrimaryColor,
-                              border: Border.all(width: 2.0, color: TextColor)),
-                    ),
-                  ),
+                  new Dot(currentDigit, 1),
+                  new Dot(currentDigit, 2),
+                  new Dot(currentDigit, 3),
+                  new Dot(currentDigit, 4),
+                  new Dot(currentDigit, 5),
+                  new Dot(currentDigit, 6),
                 ],
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(bottom: 35.0),
-              child: new Text(
-                correct,
-                style: new TextStyle(color: TextColor, fontSize: 20),
-              ),
-            ),
+                padding: EdgeInsets.only(bottom: 35.0),
+                child: new AnimatedOpacity(
+                  opacity: opacity,
+                  duration: Duration(milliseconds: 125),
+                  child: new Text(
+                    checkStatus,
+                    style: new TextStyle(color: TextColor, fontSize: 20),
+                  ),
+                )),
             Padding(
               padding: const EdgeInsets.only(bottom: 30.0),
               child: new Row(
@@ -463,3 +383,70 @@ class AuthScreenState extends State<AuthScreen> {
     );
   }
 }
+
+class Dot extends StatelessWidget {
+  final int currentDigit;
+  final int position;
+
+  Dot(this.currentDigit, this.position);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Padding(
+        padding: EdgeInsets.symmetric(horizontal: 5.0),
+        child: new AnimatedCrossFade(
+            firstChild: DotInactive(),
+            secondChild: DotActive(),
+            crossFadeState: currentDigit >= position
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
+            duration: Duration(milliseconds: 125)));
+  }
+}
+
+class DotInactive extends StatelessWidget {
+  DotInactive();
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Container(
+      height: 25.0,
+      width: 25.0,
+      decoration: new BoxDecoration(
+          shape: BoxShape.circle,
+          color: PrimaryColor,
+          border: Border.all(width: 2.0, color: TextColor)),
+    );
+  }
+}
+
+class DotActive extends StatelessWidget {
+  DotActive();
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Container(
+      height: 25.0,
+      width: 25.0,
+      decoration: new BoxDecoration(
+          shape: BoxShape.circle,
+          color: TextColor,
+          border: Border.all(width: 2.0, color: TextColor)),
+    );
+  }
+}
+
+//class Check extends StatelessWidget {
+//  final int checkStatus;
+//
+//  Check(this.checkStatus);
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    // TODO: implement build
+//    return new AnimatedOpacity(opacity: null, duration: null);
+//  }
+//}
